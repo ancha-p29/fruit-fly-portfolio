@@ -8,6 +8,14 @@
   <meta name="theme-color" content="#121511" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="data:," />
   <title>Fruit Fly Portfolio</title>
+  <!-- Google Analytics: replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <style>
     :root {
       color-scheme: light dark;
@@ -289,10 +297,11 @@
     .hero-copy p { margin: 0 0 1rem; }
     .availability { display: inline-flex; align-items: center; gap: .6rem; color: var(--ink); font-weight: 750; }
     .availability::before { content: ""; width: .7rem; height: .7rem; background: var(--lime); border-radius: 50%; box-shadow: 0 0 0 4px color-mix(in srgb, var(--lime) 24%, transparent); }
-    .portrait-wrap { position: relative; margin: 0; align-self: stretch; min-height: 520px; }
+    .portrait-wrap { position: relative; margin: 0; align-self: stretch; min-height: 520px; perspective: 1400px; }
     .portrait-wrap::before { content: "3D PORTRAIT / PRAVEEN"; position: absolute; left: -1rem; top: 2rem; z-index: 2; padding: .55rem .7rem; background: var(--orange); color: #fff; font: 800 .7rem/1 ui-monospace, monospace; }
     .portrait-wrap::after { content: ""; position: absolute; right: -1rem; bottom: -1rem; width: 72%; height: 72%; background: var(--lime); z-index: -1; }
     .portrait-wrap img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; object-position: center 32%; display: block; border: 1px solid var(--line); }
+    .portrait-wrap img { transform-style: preserve-3d; will-change: transform; }
 
     .lab-intro { background: var(--ink); color: var(--paper); }
     .lab-intro .section-label { color: var(--lime); }
@@ -304,8 +313,18 @@
     .domain-index { color: var(--orange); font: 800 .78rem/1 ui-monospace, monospace; }
     .domain-head h4 { margin: 0; font: 700 clamp(2rem, 4vw, 3.5rem)/1 Georgia, serif; letter-spacing: -.035em; }
     .domain-head p { grid-column: 2; margin: -.8rem 0 0; color: var(--muted); line-height: 1.55; }
-    .suit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-    .suit-card { background: var(--paper); padding: clamp(1.35rem, 3vw, 2.1rem); min-width: 0; }
+    .suit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; background: transparent; border: 0; }
+    .suit-card { background: var(--paper); padding: clamp(1.35rem, 3vw, 2.1rem); min-width: 0; border: 1px solid var(--line); }
+    .suit-visual {
+      margin: calc(clamp(1.35rem, 3vw, 2.1rem) * -1);
+      margin-bottom: 1.25rem;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: var(--board);
+    }
+    .suit-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .suit-card:hover .suit-visual img { transform: scale(1.045); }
     .suit-card h5 { margin: .35rem 0 1.5rem; font: 700 clamp(1.35rem, 2.3vw, 1.8rem)/1.15 Georgia, serif; letter-spacing: -.02em; }
     .codename { color: var(--orange); font: 800 .68rem/1.3 ui-monospace, monospace; letter-spacing: .07em; }
     .spec-row { display: grid; grid-template-columns: 6.5rem 1fr; gap: .8rem; padding: .78rem 0; border-top: 1px solid var(--line); }
@@ -353,7 +372,7 @@
       padding: 1.55rem 0; border-bottom: 1px solid color-mix(in srgb, var(--paper) 25%, transparent);
       align-items: baseline;
     }
-    .role .org { color: var(--lime); font-weight: 800; }
+    .role .org { color: var(--orange); font-weight: 800; }
     .role h4 { font: 700 clamp(1.2rem, 2.2vw, 1.65rem)/1.2 Georgia, serif; margin: 0; }
     .role .lens { color: color-mix(in srgb, var(--paper) 68%, transparent); font-size: .9rem; text-align: right; }
 
@@ -544,42 +563,42 @@
         <div class="suit-domain">
           <header class="domain-head"><span class="domain-index">BAY 01</span><h4>AI Products &amp; Tools</h4><p>Product discovery, retrieval systems, AI assistants, and deployed prototypes.</p></header>
           <div class="suit-grid">
-            <article class="suit-card"><span class="codename">CODENAME / CAREER ALLY · CO-AUTHORED</span><h5>Career Ally</h5><div class="spec-row"><b>MISSION</b><p>Create an AI career guidance platform that moves users toward interview readiness.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a deployed prototype with proof-of-work artifact gates to validate user progress.</p></div><div class="spec-row"><b>SPECS</b><p>Lovable · Gemini 2.5 Pro · Full PRD with 10 personas, 4 hypotheses, and 6 metrics.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>North Star: 30% interview-ready within 180 days.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / INTERVIEW PREP COPILOT</span><h5>Interview Prep Copilot</h5><div class="spec-row"><b>MISSION</b><p>Live interview preparation.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a live RAG agent for interview prep.</p></div><div class="spec-row"><b>SPECS</b><p>ChromaDB vector embeddings · Role-based metadata filtering · Claude API answer generation.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / RAG HPM</span><h5>RAG HPM Knowledge Base Builder</h5><div class="spec-row"><b>MISSION</b><p>Make retrieval-augmented generation understandable.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a RAG PLAYGROUND that visually teaches RAG step by step: chunk → embed → store → retrieve → prompt → answer, running entirely on-device.</p></div><div class="spec-row"><b>SPECS</b><p>Vanilla HTML · CSS · JavaScript · No APIs.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div><a class="project-link" href="https://huggingface.co/spaces/VenkataP29/RAG-HPM" target="_blank" rel="noopener">Open live build</a></article>
-            <article class="suit-card"><span class="codename">CODENAME / CLAUDE CASE STUDY</span><h5>Claude AI Case Study</h5><div class="spec-row"><b>MISSION</b><p>Understand AI assistant usage.</p></div><div class="spec-row"><b>THE BUILD</b><p>Conducted 10+ user interviews, wrote a PRD from the findings, and validated concepts through vibe coding prototypes.</p></div><div class="spec-row"><b>SPECS</b><p>User interviews · PRD · Vibe coding prototypes.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>10+ user interviews informed the product concepts.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / COLLABAVIP</span><h5>CollabAVIP</h5><div class="spec-row"><b>MISSION</b><p>B2B SaaS product concept.</p></div><div class="spec-row"><b>THE BUILD</b><p>Designed Figma wireframes across 5 product surfaces.</p></div><div class="spec-row"><b>SPECS</b><p>Figma.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>5 product surfaces wireframed.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / CANVAS LMS</span><h5>Canvas LMS AI Assistant</h5><div class="spec-row"><b>MISSION</b><p>Students need assignment help inside their LMS.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a mock Canvas LMS interface for “CS 301: Data Structures” with a course dashboard; assignments for a BST implementation project, sorting quiz, tree traversal lab, and paper review; an AI Assistant panel; “AI Help” and “Request Human Help” buttons; and a gradebook preview.</p></div><div class="spec-row"><b>SPECS</b><p>Static build · HTML · CSS.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div><a class="project-link" href="https://huggingface.co/spaces/VenkataP29/Canvas_Lms" target="_blank" rel="noopener">Open live build</a></article>
-            <article class="suit-card"><span class="codename">CODENAME / MVP HPM GAME</span><h5>MVP HPM Game</h5><div class="spec-row"><b>MISSION</b><p>Practice product management skills.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a gamified ProductLab with Product Triage using RICE, Metric Master, Roadmap Builder, and Stakeholder Negotiation; tracks XP, levels, rank, and achievements.</p></div><div class="spec-row"><b>SPECS</b><p>Static build · HTML · CSS.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div><a class="project-link" href="https://huggingface.co/spaces/VenkataP29/MVP_HPM" target="_blank" rel="noopener">Open live build</a></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/career-ally.jpg" alt="Career Ally project illustration" loading="lazy"></div><span class="codename">CODENAME / CAREER ALLY · CO-AUTHORED</span><h5>Career Ally</h5><div class="spec-row"><b>MISSION</b><p>Create an AI career guidance platform that moves users toward interview readiness.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a deployed prototype with proof-of-work artifact gates to validate user progress.</p></div><div class="spec-row"><b>SPECS</b><p>Lovable · Gemini 2.5 Pro · Full PRD with 10 personas, 4 hypotheses, and 6 metrics.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>North Star: 30% interview-ready within 180 days.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/interview-prep.jpg" alt="Interview Prep Copilot project illustration" loading="lazy"></div><span class="codename">CODENAME / INTERVIEW PREP COPILOT</span><h5>Interview Prep Copilot</h5><div class="spec-row"><b>MISSION</b><p>Live interview preparation.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a live RAG agent for interview prep.</p></div><div class="spec-row"><b>SPECS</b><p>ChromaDB vector embeddings · Role-based metadata filtering · Claude API answer generation.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/rag-hpm.jpg" alt="RAG HPM Knowledge Base Builder project illustration" loading="lazy"></div><span class="codename">CODENAME / RAG HPM</span><h5>RAG HPM Knowledge Base Builder</h5><div class="spec-row"><b>MISSION</b><p>Make retrieval-augmented generation understandable.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a RAG PLAYGROUND that visually teaches RAG step by step: chunk → embed → store → retrieve → prompt → answer, running entirely on-device.</p></div><div class="spec-row"><b>SPECS</b><p>Vanilla HTML · CSS · JavaScript · No APIs.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div><a class="project-link" href="https://huggingface.co/spaces/VenkataP29/RAG-HPM" target="_blank" rel="noopener">Open live build</a></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/claude-case.jpg" alt="Claude AI Case Study project illustration" loading="lazy"></div><span class="codename">CODENAME / CLAUDE CASE STUDY</span><h5>Claude AI Case Study</h5><div class="spec-row"><b>MISSION</b><p>Understand AI assistant usage.</p></div><div class="spec-row"><b>THE BUILD</b><p>Conducted 10+ user interviews, wrote a PRD from the findings, and validated concepts through vibe coding prototypes.</p></div><div class="spec-row"><b>SPECS</b><p>User interviews · PRD · Vibe coding prototypes.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>10+ user interviews informed the product concepts.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/collabavip.jpg" alt="CollabAVIP project illustration" loading="lazy"></div><span class="codename">CODENAME / COLLABAVIP</span><h5>CollabAVIP</h5><div class="spec-row"><b>MISSION</b><p>B2B SaaS product concept.</p></div><div class="spec-row"><b>THE BUILD</b><p>Designed Figma wireframes across 5 product surfaces.</p></div><div class="spec-row"><b>SPECS</b><p>Figma.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>5 product surfaces wireframed.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/canvas-lms.jpg" alt="Canvas LMS AI Assistant project illustration" loading="lazy"></div><span class="codename">CODENAME / CANVAS LMS</span><h5>Canvas LMS AI Assistant</h5><div class="spec-row"><b>MISSION</b><p>Students need assignment help inside their LMS.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a mock Canvas LMS interface for “CS 301: Data Structures” with a course dashboard; assignments for a BST implementation project, sorting quiz, tree traversal lab, and paper review; an AI Assistant panel; “AI Help” and “Request Human Help” buttons; and a gradebook preview.</p></div><div class="spec-row"><b>SPECS</b><p>Static build · HTML · CSS.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div><a class="project-link" href="https://huggingface.co/spaces/VenkataP29/Canvas_Lms" target="_blank" rel="noopener">Open live build</a></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/mvp-hpm-game.jpg" alt="MVP HPM Game project illustration" loading="lazy"></div><span class="codename">CODENAME / MVP HPM GAME</span><h5>MVP HPM Game</h5><div class="spec-row"><b>MISSION</b><p>Practice product management skills.</p></div><div class="spec-row"><b>THE BUILD</b><p>Built a gamified ProductLab with Product Triage using RICE, Metric Master, Roadmap Builder, and Stakeholder Negotiation; tracks XP, levels, rank, and achievements.</p></div><div class="spec-row"><b>SPECS</b><p>Static build · HTML · CSS.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>—</p></div><a class="project-link" href="https://huggingface.co/spaces/VenkataP29/MVP_HPM" target="_blank" rel="noopener">Open live build</a></article>
           </div>
         </div>
 
         <div class="suit-domain">
           <header class="domain-head"><span class="domain-index">BAY 02</span><h4>Data &amp; Analytics</h4><p>Structured analysis that turns large datasets into decisions and visible patterns.</p></header>
           <div class="suit-grid">
-            <article class="suit-card"><span class="codename">CODENAME / MBTA ROW</span><h5>MBTA ROW Access Compliance Analysis</h5><div class="spec-row"><b>MISSION</b><p>Identify compliance gaps in right-of-way permit records.</p></div><div class="spec-row"><b>THE BUILD</b><p>Cleaned and analyzed permit data for trends, then built dashboards.</p></div><div class="spec-row"><b>SPECS</b><p>Python · SQL · 11,912 records.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>7 dashboards showing compliance gaps.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / CRIME LANDSCAPE</span><h5>US Crime Landscape Analysis</h5><div class="spec-row"><b>MISSION</b><p>Analyze patterns in a large US crime dataset.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 5-person group to build dashboards on crime trends.</p></div><div class="spec-row"><b>SPECS</b><p>Tableau · 982,638 records.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Crime-trend dashboards across 982,638 records.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / PROPERTY VALUE</span><h5>Boston Property Assessment</h5><div class="spec-row"><b>MISSION</b><p>Model Boston property values.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 3-person group to develop and compare regression approaches.</p></div><div class="spec-row"><b>SPECS</b><p>Python · Linear Regression · Random Forest regression.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Linear and Random Forest models developed for property values.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / ADULT INCOME</span><h5>UCI Adult Income Classification</h5><div class="spec-row"><b>MISSION</b><p>Compare classification models on the UCI Adult Income dataset.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 3-person group to compare KNN, Decision Tree, and Logistic Regression.</p></div><div class="spec-row"><b>SPECS</b><p>Python · scikit-learn · KNN · Decision Tree · Logistic Regression.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Best accuracy: 84.26%.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / NLSY97</span><h5>NLSY97 Statistical Analysis</h5><div class="spec-row"><b>MISSION</b><p>Analyze longitudinal survey data with statistical methods.</p></div><div class="spec-row"><b>THE BUILD</b><p>Completed a solo analysis using chi-square, ANOVA, and regression.</p></div><div class="spec-row"><b>SPECS</b><p>Python · Chi-square · ANOVA · Regression.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Solo statistical analysis of longitudinal survey data.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/mbta-row.jpg" alt="MBTA ROW Access Compliance Analysis project illustration" loading="lazy"></div><span class="codename">CODENAME / MBTA ROW</span><h5>MBTA ROW Access Compliance Analysis</h5><div class="spec-row"><b>MISSION</b><p>Identify compliance gaps in right-of-way permit records.</p></div><div class="spec-row"><b>THE BUILD</b><p>Cleaned and analyzed permit data for trends, then built dashboards.</p></div><div class="spec-row"><b>SPECS</b><p>Python · SQL · 11,912 records.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>7 dashboards showing compliance gaps.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/crime-landscape.jpg" alt="US Crime Landscape Analysis project illustration" loading="lazy"></div><span class="codename">CODENAME / CRIME LANDSCAPE</span><h5>US Crime Landscape Analysis</h5><div class="spec-row"><b>MISSION</b><p>Analyze patterns in a large US crime dataset.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 5-person group to build dashboards on crime trends.</p></div><div class="spec-row"><b>SPECS</b><p>Tableau · 982,638 records.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Crime-trend dashboards across 982,638 records.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/boston-property.jpg" alt="Boston Property Assessment project illustration" loading="lazy"></div><span class="codename">CODENAME / PROPERTY VALUE</span><h5>Boston Property Assessment</h5><div class="spec-row"><b>MISSION</b><p>Model Boston property values.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 3-person group to develop and compare regression approaches.</p></div><div class="spec-row"><b>SPECS</b><p>Python · Linear Regression · Random Forest regression.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Linear and Random Forest models developed for property values.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/uci-income.jpg" alt="UCI Adult Income Classification project illustration" loading="lazy"></div><span class="codename">CODENAME / ADULT INCOME</span><h5>UCI Adult Income Classification</h5><div class="spec-row"><b>MISSION</b><p>Compare classification models on the UCI Adult Income dataset.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 3-person group to compare KNN, Decision Tree, and Logistic Regression.</p></div><div class="spec-row"><b>SPECS</b><p>Python · scikit-learn · KNN · Decision Tree · Logistic Regression.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Best accuracy: 84.26%.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/nlsy97.jpg" alt="NLSY97 Statistical Analysis project illustration" loading="lazy"></div><span class="codename">CODENAME / NLSY97</span><h5>NLSY97 Statistical Analysis</h5><div class="spec-row"><b>MISSION</b><p>Analyze longitudinal survey data with statistical methods.</p></div><div class="spec-row"><b>THE BUILD</b><p>Completed a solo analysis using chi-square, ANOVA, and regression.</p></div><div class="spec-row"><b>SPECS</b><p>Python · Chi-square · ANOVA · Regression.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Solo statistical analysis of longitudinal survey data.</p></div></article>
           </div>
         </div>
 
         <div class="suit-domain">
           <header class="domain-head"><span class="domain-index">BAY 03</span><h4>Hardware &amp; IoT</h4><p>RGMCET E-Cell · 2019–2021 — autonomous systems designed around real constraints.</p></header>
           <div class="suit-grid">
-            <article class="suit-card"><span class="codename">CODENAME / PRAGYAN · NASA SPACE APPS 2019</span><h5>Project Pragyan</h5><div class="spec-row"><b>MISSION</b><p>Rank lunar sample value without a lab.</p></div><div class="spec-row"><b>THE BUILD</b><p>As Product Lead at the hardware/software intersection, built an autonomous rover with off-the-shelf parts. Used UV, light, and gas sensors instead of spectrometers; gas sensors detected volatiles cameras miss. Applied MoSCoW prioritization under a 48-hour, limited-stipend constraint.</p></div><div class="spec-row"><b>SPECS</b><p>Arduino · Raspberry Pi · C++ · UV, light, and gas sensors.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Working PoC flagged high-value samples on a simulated surface — ~80% of the insight at ~5% of the cost.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / AGTECH ROVER</span><h5>Agtech Field Rover</h5><div class="spec-row"><b>MISSION</b><p>Build an autonomous rover within a Rs 50,000 budget.</p></div><div class="spec-row"><b>THE BUILD</b><p>Managed a phased stage-gate lifecycle and developed a Random Forest model to predict incursion risk.</p></div><div class="spec-row"><b>SPECS</b><p>Autonomous rover · Random Forest · Rs 50,000 budget.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Delivered on schedule; the PoC ran on unpaved agricultural terrain.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / CNFET</span><h5>CNFET Thesis</h5><div class="spec-row"><b>MISSION</b><p>Optimize carbon nanotube transistor threshold voltage.</p></div><div class="spec-row"><b>THE BUILD</b><p>Developed and evaluated a transistor design.</p></div><div class="spec-row"><b>SPECS</b><p>Cadence Virtuoso · HSPICE.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>43% transistor count reduction.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/pragyan.jpg" alt="Project Pragyan project illustration" loading="lazy"></div><span class="codename">CODENAME / PRAGYAN · NASA SPACE APPS 2019</span><h5>Project Pragyan</h5><div class="spec-row"><b>MISSION</b><p>Rank lunar sample value without a lab.</p></div><div class="spec-row"><b>THE BUILD</b><p>As Product Lead at the hardware/software intersection, built an autonomous rover with off-the-shelf parts. Used UV, light, and gas sensors instead of spectrometers; gas sensors detected volatiles cameras miss. Applied MoSCoW prioritization under a 48-hour, limited-stipend constraint.</p></div><div class="spec-row"><b>SPECS</b><p>Arduino · Raspberry Pi · C++ · UV, light, and gas sensors.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Working PoC flagged high-value samples on a simulated surface — ~80% of the insight at ~5% of the cost.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/agtech-rover.jpg" alt="Agtech Field Rover project illustration" loading="lazy"></div><span class="codename">CODENAME / AGTECH ROVER</span><h5>Agtech Field Rover</h5><div class="spec-row"><b>MISSION</b><p>Build an autonomous rover within a Rs 50,000 budget.</p></div><div class="spec-row"><b>THE BUILD</b><p>Managed a phased stage-gate lifecycle and developed a Random Forest model to predict incursion risk.</p></div><div class="spec-row"><b>SPECS</b><p>Autonomous rover · Random Forest · Rs 50,000 budget.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Delivered on schedule; the PoC ran on unpaved agricultural terrain.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/cnfet.jpg" alt="CNFET Thesis project illustration" loading="lazy"></div><span class="codename">CODENAME / CNFET</span><h5>CNFET Thesis</h5><div class="spec-row"><b>MISSION</b><p>Optimize carbon nanotube transistor threshold voltage.</p></div><div class="spec-row"><b>THE BUILD</b><p>Developed and evaluated a transistor design.</p></div><div class="spec-row"><b>SPECS</b><p>Cadence Virtuoso · HSPICE.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>43% transistor count reduction.</p></div></article>
           </div>
         </div>
 
         <div class="suit-domain">
           <header class="domain-head"><span class="domain-index">BAY 04</span><h4>Quality &amp; Operations</h4><p>Governance, process capability, quality planning, and operational decision systems.</p></header>
           <div class="suit-grid">
-            <article class="suit-card"><span class="codename">CODENAME / IT GOVERNANCE</span><h5>Alnylam IT Governance Capstone</h5><div class="spec-row"><b>MISSION</b><p>Create an IT project intake framework.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 4-person team on a 5-stage gate framework with a RACI matrix, SIPOC analysis, LucidChart process flows, and a weighted scoring model.</p></div><div class="spec-row"><b>SPECS</b><p>5-stage gate · RACI · SIPOC · LucidChart · Weighted scoring.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Scoring model piloted on 3 real candidate projects. Budget figures were a hypothetical classroom exercise.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / QUALITY ANALYTICS</span><h5>Quality Analytics Simulation</h5><div class="spec-row"><b>MISSION</b><p>Assess process capability through Six Sigma analysis.</p></div><div class="spec-row"><b>THE BUILD</b><p>Completed process analysis in Minitab.</p></div><div class="spec-row"><b>SPECS</b><p>Six Sigma · Minitab.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Process capability: Cp 1.33, Cpk 1.00.</p></div></article>
-            <article class="suit-card"><span class="codename">CODENAME / IVANPAH CSP</span><h5>Ivanpah CSP Quality Management Plan</h5><div class="spec-row"><b>MISSION</b><p>Develop a quality plan for a 392 MW solar thermal plant.</p></div><div class="spec-row"><b>THE BUILD</b><p>Created an ISO 9001:2015-aligned plan with a House of Quality matrix and risk registers.</p></div><div class="spec-row"><b>SPECS</b><p>ISO 9001:2015 · House of Quality · Risk registers.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Quality management plan for a 392 MW solar thermal plant.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/alnylam-governance.jpg" alt="Alnylam IT Governance Capstone project illustration" loading="lazy"></div><span class="codename">CODENAME / IT GOVERNANCE</span><h5>Alnylam IT Governance Capstone</h5><div class="spec-row"><b>MISSION</b><p>Create an IT project intake framework.</p></div><div class="spec-row"><b>THE BUILD</b><p>Worked in a 4-person team on a 5-stage gate framework with a RACI matrix, SIPOC analysis, LucidChart process flows, and a weighted scoring model.</p></div><div class="spec-row"><b>SPECS</b><p>5-stage gate · RACI · SIPOC · LucidChart · Weighted scoring.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Scoring model piloted on 3 real candidate projects. Budget figures were a hypothetical classroom exercise.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/quality-analytics.jpg" alt="Quality Analytics Simulation project illustration" loading="lazy"></div><span class="codename">CODENAME / QUALITY ANALYTICS</span><h5>Quality Analytics Simulation</h5><div class="spec-row"><b>MISSION</b><p>Assess process capability through Six Sigma analysis.</p></div><div class="spec-row"><b>THE BUILD</b><p>Completed process analysis in Minitab.</p></div><div class="spec-row"><b>SPECS</b><p>Six Sigma · Minitab.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Process capability: Cp 1.33, Cpk 1.00.</p></div></article>
+            <article class="suit-card"><div class="suit-visual"><img src="assets/ivanpah-csp.jpg" alt="Ivanpah CSP Quality Management Plan project illustration" loading="lazy"></div><span class="codename">CODENAME / IVANPAH CSP</span><h5>Ivanpah CSP Quality Management Plan</h5><div class="spec-row"><b>MISSION</b><p>Develop a quality plan for a 392 MW solar thermal plant.</p></div><div class="spec-row"><b>THE BUILD</b><p>Created an ISO 9001:2015-aligned plan with a House of Quality matrix and risk registers.</p></div><div class="spec-row"><b>SPECS</b><p>ISO 9001:2015 · House of Quality · Risk registers.</p></div><div class="spec-row field-result"><b>FIELD RESULTS</b><p>Quality management plan for a 392 MW solar thermal plant.</p></div></article>
           </div>
         </div>
       </section>
@@ -690,6 +709,7 @@
         if (mark === 'X') {
           scores.player++;
           playerScoreEl.textContent = scores.player;
+          track('game_won', { winner: 'player' });
           statusEl.textContent = 'You won. The fly is devastated.';
           flyBubble.textContent = 'impossible';
           fly.classList.add('defeated');
@@ -769,6 +789,7 @@
         victory.classList.remove('show');
         victory.setAttribute('aria-hidden', 'true');
         document.getElementById('gate').style.display = 'none';
+        track('portfolio_entered');
         portfolio.classList.add('unlocked');
         portfolio.setAttribute('aria-hidden', 'false');
         window.scrollTo({ top: 0, behavior: 'auto' });
@@ -776,6 +797,41 @@
         title.setAttribute('tabindex', '-1');
         title.focus();
       });
+
+      function track(name, params) {
+        if (typeof gtag === 'function') { try { gtag('event', name, params || {}); } catch (e) {} }
+      }
+      document.querySelectorAll('.project-link').forEach(a => {
+        a.addEventListener('click', () => {
+          const card = a.closest('.suit-card');
+          const title = card ? card.querySelector('h5').textContent : 'unknown';
+          track('project_open', { project: title });
+        });
+      });
+
+      /* 3D animated portrait: idle cinematic sway + pointer parallax tilt */
+      (function () {
+        const img = document.querySelector('.portrait-wrap img');
+        if (!img || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const wrap = img.closest('.portrait-wrap');
+        let tx = 0, ty = 0, cx = 0, cy = 0;
+        wrap.addEventListener('pointermove', e => {
+          const r = wrap.getBoundingClientRect();
+          tx = ((e.clientX - r.left) / r.width - .5) * 16;
+          ty = ((e.clientY - r.top) / r.height - .5) * -12;
+        });
+        wrap.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
+        const t0 = performance.now();
+        (function anim(now) {
+          const t = (now - t0) / 1000;
+          cx += (tx - cx) * .07; cy += (ty - cy) * .07;
+          const swayY = Math.sin(t * .65) * 7;
+          const swayX = Math.cos(t * .5) * 4;
+          const lift = Math.sin(t * .9) * 8;
+          img.style.transform = 'translateZ(46px) translateY(' + (lift * .45).toFixed(2) + 'px) rotateY(' + (swayY + cx).toFixed(2) + 'deg) rotateX(' + (swayX + cy).toFixed(2) + 'deg)';
+          requestAnimationFrame(anim);
+        })(t0);
+      })();
 
       document.querySelectorAll('[data-copy]').forEach(btn => {
         btn.addEventListener('click', async () => {
